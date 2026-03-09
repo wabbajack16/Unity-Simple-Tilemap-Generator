@@ -14,7 +14,7 @@
 为提升性能，噪声生成逻辑借助 Unity 的 Job System（任务系统）和 Burst 编译器实现了并行化处理。
 
 ## 示例效果：
-  ![地图生成效果](https://github.com/wabbajack16/Unity-Simple-Tilemap-Generator/blob/main/Examples/cozy-farm-example.png)
+  ![地图生成效果](Example/example.png)
 ### 参数配置
 - **地图设置**
   - 区块数量：10 × 2
