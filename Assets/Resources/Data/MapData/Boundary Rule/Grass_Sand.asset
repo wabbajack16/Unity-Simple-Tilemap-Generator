@@ -1,0 +1,33 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 298ffbfd05f194e4cb3f798f52307a53, type: 3}
+  m_Name: Grass_Sand
+  m_EditorClassIdentifier: 
+  sourceType: 2
+  adjacentType: 3
+  transitionTiles:
+  - {fileID: 11400000, guid: 443e0f5e5171a7141a6d7466d97ff179, type: 2}
+  - {fileID: 11400000, guid: f50ce8a72c6bef04d97b99b79f406352, type: 2}
+  - {fileID: 11400000, guid: b3249e6b01b3ac14eb4e759e2690f9c2, type: 2}
+  - {fileID: 11400000, guid: 60fa75722f5fe6744a02862d3debc110, type: 2}
+  - {fileID: 11400000, guid: 267b24ffa10d3474cab2fa15843bc78b, type: 2}
+  - {fileID: 11400000, guid: 1d4fadf32c80d8d4da5c48482889ea65, type: 2}
+  - {fileID: 11400000, guid: c8850419cbf6f374cbf9065a6bb6acd3, type: 2}
+  - {fileID: 11400000, guid: f8ee11fd484596842bad9d6f6cdc46b3, type: 2}
+  - {fileID: 11400000, guid: 28211aee2c6d6da478ac8748d5a789a0, type: 2}
+  - {fileID: 11400000, guid: 9f0ef13f0942e9c449704659be277d3b, type: 2}
+  - {fileID: 11400000, guid: a8cf36b67b3927842b60c680b820397e, type: 2}
+  - {fileID: 11400000, guid: 1653e8f27ac25174c870c6c4e5516fcd, type: 2}
+  - {fileID: 11400000, guid: a70f0c2c902795f4fa8ca89fb2181651, type: 2}
+  - {fileID: 11400000, guid: dd4e2f1cde0436546b7cc190215c3136, type: 2}
+  hasBackGround: 1
+  priority: 1

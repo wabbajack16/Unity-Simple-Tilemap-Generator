@@ -1,0 +1,31 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 298ffbfd05f194e4cb3f798f52307a53, type: 3}
+  m_Name: Snow_Hill
+  m_EditorClassIdentifier: 
+  sourceType: 4
+  adjacentType: 5
+  transitionTiles:
+  - {fileID: 11400000, guid: b486442d452394847be80e347f49d683, type: 2}
+  - {fileID: 11400000, guid: e92916500a8d06c4d8325f1cc88531fd, type: 2}
+  - {fileID: 11400000, guid: 2b3eaa31a40840247af8e78e8571ef03, type: 2}
+  - {fileID: 11400000, guid: 1f0e356833343a54aafc3708ddb2c9dc, type: 2}
+  - {fileID: 11400000, guid: 64af7ab9a1a8d024980569fbe230b339, type: 2}
+  - {fileID: 11400000, guid: 22e7c207687d2974fb99479b8a8ab7ac, type: 2}
+  - {fileID: 11400000, guid: e18993c18bf47f749937b37d6f04d6be, type: 2}
+  - {fileID: 11400000, guid: acaebe08abdeb394b8c8cde1f35d46e0, type: 2}
+  - {fileID: 11400000, guid: 5a789ecd27cf69147aefa171636b2e26, type: 2}
+  - {fileID: 11400000, guid: 129cab1110e01014eafa2799e30d23e7, type: 2}
+  - {fileID: 11400000, guid: 0c2006fa477fd6e43af3e15e7cdd3b4e, type: 2}
+  - {fileID: 11400000, guid: 7f74d0d06d16a764c836d2f2b7e578aa, type: 2}
+  hasBackGround: 0
+  priority: 1

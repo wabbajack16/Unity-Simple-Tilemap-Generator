@@ -1,0 +1,33 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 298ffbfd05f194e4cb3f798f52307a53, type: 3}
+  m_Name: Hill_Sand
+  m_EditorClassIdentifier: 
+  sourceType: 5
+  adjacentType: 3
+  transitionTiles:
+  - {fileID: 11400000, guid: 88aeadb6890f54c44aa69010723c1bb9, type: 2}
+  - {fileID: 11400000, guid: 0ed9b08add1d2bd4cb3bd8dae5bc26e0, type: 2}
+  - {fileID: 11400000, guid: 7d2e3ce0cc3d12243a463b28d988b4c2, type: 2}
+  - {fileID: 11400000, guid: 3448ae250240b644880355a2b2f99f71, type: 2}
+  - {fileID: 11400000, guid: 9a9cb85e415d3b4418fb05cc7aca26ca, type: 2}
+  - {fileID: 11400000, guid: a32a6afc99a71d143814802478f69200, type: 2}
+  - {fileID: 11400000, guid: 51b0dbb402a522e438e31629c5ba4496, type: 2}
+  - {fileID: 11400000, guid: 859bdb2cb248afc43bda3f0fa0a69af4, type: 2}
+  - {fileID: 11400000, guid: 3b305e813d506ed41a9e559eca9fff33, type: 2}
+  - {fileID: 11400000, guid: 9a657fcf5c9d484408427439c6e966ae, type: 2}
+  - {fileID: 11400000, guid: 1c6d3cba9eb92ec4e80e7b3a5378d41b, type: 2}
+  - {fileID: 11400000, guid: e9e27d58b7f034641965b590b6ed7909, type: 2}
+  - {fileID: 11400000, guid: 2a6b90c05f78b4445971b9b4c1f85c44, type: 2}
+  - {fileID: 11400000, guid: ff7f175200cdf87458b5bda9f1a66306, type: 2}
+  hasBackGround: 0
+  priority: 2
