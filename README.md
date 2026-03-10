@@ -15,6 +15,7 @@
 
 ## 示例效果：
   ![地图生成效果](Example/example.png)
+  ![Chunk卸载效果](Example/example2.png)
 ### 参数配置
 - **地图设置**
   - 区块数量：10 × 2
