@@ -22,10 +22,16 @@ public class TileTransitionGenerator
     private readonly int[] _dirY = { 1, -1, 0, 0, 1, -1, 1, -1 };
     private BoundaryRule finalRule;
 
+    private int mapMinX;
+    private int mapMinY;
+
     public TileTransitionGenerator(
         List<BoundaryRule> boundaryRules,
         TerrainTileResolver resolver,
-        int cutOffNum)
+        int cutOffNum,
+        int mapMinX,
+        int mapMinY
+        )
     {
         // 方向向量到索引的映射
         for (int i = 0; i < _dirX.Length; i++)
@@ -48,37 +54,58 @@ public class TileTransitionGenerator
 
         this.resolver = resolver;
         this.cutOffNum = cutOffNum;
+        this.mapMinX = mapMinX;
+        this.mapMinY = mapMinY;
     }
 
+    private int ToArrayX(int x)
+    {
+        return x - mapMinX + 1;
+    }
+    private int ToArrayY(int y)
+    {
+        return y - mapMinY + 1;
+    }
+
+
     public void GenerateTransitions(
-        Dictionary<Vector3Int, TileType> baseTiles,
-        Dictionary<Vector3Int, CustomTile>[] caches,
+        // Dictionary<Vector2Int, TileType> baseTiles,
+        TileType[,] baseTileMap,
+        Dictionary<Vector2Int, CustomTile>[] caches,
         int startX,
         int endX,
         int startY,
         int endY)
     {
-        GenerateTransition(baseTiles, caches, startX, endX, startY, endY, cutOffNum);
+        // GenerateTransition(baseTiles, caches, startX, endX, startY, endY, cutOffNum);
+        // GenerateTransition(baseTiles, caches, startX, endX, startY, endY, -1);
 
-        GenerateTransition(baseTiles, caches, startX, endX, startY, endY, -1);
+        GenerateTransition(baseTileMap, caches, startX, endX, startY, endY, cutOffNum);
+        GenerateTransition(baseTileMap, caches, startX, endX, startY, endY, -1);
     }
 
     private void GenerateTransition(
-        Dictionary<Vector3Int, TileType> baseTiles,
-        Dictionary<Vector3Int, CustomTile>[] caches,
+        // Dictionary<Vector2Int, TileType> baseTiles,
+        TileType[,] baseTileMap,
+        Dictionary<Vector2Int, CustomTile>[] caches,
         int startX,
         int endX,
         int startY,
         int endY,
-        int cutOffNum)
+        int cutOffNum
+        )
     {
         for (int y = startY - 1; y <= endY + 1; y++)
         {
             for (int x = startX - 1; x <= endX + 1; x++)
             {
-                Vector3Int currentPos = new(x, y, 0);
+                Vector2Int currentPos = new(x, y);
 
-                if (!baseTiles.TryGetValue(currentPos, out TileType currentType) || currentType == TileType.None)
+
+                // if (!baseTiles.TryGetValue(currentPos, out TileType currentType) || currentType == TileType.None)
+                //     continue;
+                TileType currentType = baseTileMap[ToArrayX(currentPos.x), ToArrayY(currentPos.y)];
+                if (currentType == TileType.None)
                     continue;
 
                 int differentCount = 0;
@@ -88,12 +115,15 @@ public class TileTransitionGenerator
                 // 检查8个方向的邻居
                 for (int dirId = 0; dirId < _dirX.Length; dirId++)
                 {
-                    Vector3Int neighborPos = new(x + _dirX[dirId], y + _dirY[dirId], 0);
-                    if (!baseTiles.TryGetValue(neighborPos, out TileType neighborType))
+                    Vector2Int neighborPos = new(x + _dirX[dirId], y + _dirY[dirId]);
+                    // if (!baseTiles.TryGetValue(neighborPos, out TileType neighborType))
+                    //     continue;
+                    TileType neighborType = baseTileMap[ToArrayX(neighborPos.x), ToArrayY(neighborPos.y)];
+                    if (neighborType == TileType.None)
                         continue;
 
                     if (neighborType == currentType)
-                        continue;
+                            continue;
 
                     // 查找过渡规则
                     var ruleKey = (currentType, neighborType);
@@ -132,8 +162,10 @@ public class TileTransitionGenerator
                         {
                             for (int i = 4; i < 8; i++)
                             {
-                                Vector3Int checkPos = new(x + _dirX[i], y + _dirY[i], 0);
-                                if (baseTiles.TryGetValue(checkPos, out var checkType) && checkType != currentType)
+                                Vector2Int checkPos = new(x + _dirX[i], y + _dirY[i]);
+                                // if (baseTiles.TryGetValue(checkPos, out var checkType) && checkType != currentType)
+                                TileType checkType = baseTileMap[ToArrayX(checkPos.x), ToArrayY(checkPos.y)];
+                                if (checkType != TileType.None && checkType != currentType)
                                 {
                                     if (_dirX[i] == -1 && _dirY[i] == 1 || _dirX[i] == 1 && _dirY[i] == 1)
                                     {
@@ -152,8 +184,10 @@ public class TileTransitionGenerator
                             Vector3Int dirCorrection = Vector3Int.zero;
                             for (int i = 0; i < 4; i++)
                             {
-                                Vector3Int checkPos = new(x + _dirX[i], y + _dirY[i], 0);
-                                if (baseTiles.TryGetValue(checkPos, out TileType checkType) && checkType != currentType)
+                                Vector2Int checkPos = new(x + _dirX[i], y + _dirY[i]);
+                                // if (baseTiles.TryGetValue(checkPos, out TileType checkType) && checkType != currentType)
+                                TileType checkType = baseTileMap[ToArrayX(checkPos.x), ToArrayY(checkPos.y)];
+                                if (checkType != TileType.None && checkType != currentType)
                                 {
                                     dirCorrection += new Vector3Int(_dirX[i], _dirY[i], 0);
                                 }
@@ -169,11 +203,12 @@ public class TileTransitionGenerator
                     if (differentCount >= cutOffNum || GetReplaceTile(differentCount, totalDir) == -1)
                     {
                         newType = finalRule.adjacentType;
-                        baseTiles[currentPos] = newType;
+                        // baseTiles[currentPos] = newType;
+                        baseTileMap[ToArrayX(currentPos.x), ToArrayY(currentPos.y)] = newType;
 
                         if (resolver.TileTypeToCustomTile.TryGetValue(newType, out var targetTile) && targetTile != null)
                         {
-                            Vector3Int tilePos = new(x, y, 0);
+                            Vector2Int tilePos = new(x, y);
                             caches[0][tilePos] = targetTile;
                         }
                     }
@@ -197,7 +232,7 @@ public class TileTransitionGenerator
 
                     if (tileToSet != null)
                     {
-                        Vector3Int tilePos = new(x, y, 0);
+                        Vector2Int tilePos = new(x, y);
                         resolver.TileTypeToCustomTile.TryGetValue(finalRule.adjacentType, out var TileToSetBG);
                         if (!caches[1].ContainsKey(tilePos))
                             caches[1].Add(tilePos, TileToSetBG);

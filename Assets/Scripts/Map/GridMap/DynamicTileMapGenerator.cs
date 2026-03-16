@@ -1,6 +1,8 @@
+using System;
 using System.Collections.Generic;
 using Unity.Mathematics;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 using UnityEngine.Tilemaps;
 
 [RequireComponent(typeof(Grid))]
@@ -56,6 +58,8 @@ public class DynamicTileMapGenerator : MonoBehaviour
     private void Awake()
     {
         chunkSize = new Vector2Int(singleChunkWidth, singleChunkHeight);
+        int mapMinX = Bottomlefttotopright[0].x * chunkSize.x;
+        int mapMinY = Bottomlefttotopright[0].y * chunkSize.y;
 
         noiseGenerator = new NoiseGenerator(
             noiseScale,
@@ -75,7 +79,9 @@ public class DynamicTileMapGenerator : MonoBehaviour
         tileTransitionGenerator = new TileTransitionGenerator(
             boundaryRules,
             terrainTileResolver,
-            difCutOffNum
+            difCutOffNum,
+            mapMinX,
+            mapMinY
         );
 
         tilemapRender = new TilemapRender(
@@ -89,37 +95,33 @@ public class DynamicTileMapGenerator : MonoBehaviour
             terrainTileResolver,
             tileTransitionGenerator,
             tilemapRender,
-            chunkSize
+            preGenerateRadius,
+            Bottomlefttotopright,
+            unloadDistance,
+            chunkSize,
+            mapMinX,
+            mapMinY
         );
     }
+
     void Start()
     {
-        CheckAndGenerateSurroundChunks(Vector2Int.zero);
+        Vector2 PlayerPos = Player.Instance.GetPos();
+        chunkManager.CheckAndGenerateSurroundChunks(Vector2Int.RoundToInt(PlayerPos));
     }
 
     void Update()
     {
-        // if (PlayerManager.Instance == null || Camera.main == null)
-        //     return;
-
-        // // 获取玩家当前所在Chunk
-        // Vector2Int playerChunkIndex = GetPlayerCurrentChunkIndex();
-
-        // // 生成周围Chunk
-        // ChunkManager.CheckAndGenerateSurroundChunks(playerChunkIndex);
-
-        // // 卸载过远的Chunk
-        // if (unloadDistance > preGenerateRadius)
-        //     UnloadDistantChunks(playerChunkIndex);
+        chunkManager.SetChunkForUpdate();
     }
     private void OnValidate()
     {
         // 确保地图坐标不超出大小限制
-        while (Bottomlefttotopright[1].x < Bottomlefttotopright[0].x)
+        while (Bottomlefttotopright[1].x <= Bottomlefttotopright[0].x)
         {
             Bottomlefttotopright[1].x = Bottomlefttotopright[0].x + 1;
         }
-        while (Bottomlefttotopright[1].y < Bottomlefttotopright[0].y)
+        while (Bottomlefttotopright[1].y <= Bottomlefttotopright[0].y)
         {
             Bottomlefttotopright[1].y = Bottomlefttotopright[0].y + 1;
         }
@@ -148,46 +150,8 @@ public class DynamicTileMapGenerator : MonoBehaviour
             unloadDistance = 2 * preGenerateRadius;
     }
 
-    private bool WithinLimits(Vector2Int target, Vector2Int minVector, Vector2Int maxVector)
+    void OnDestroy()
     {
-        return IsInRange(target.x, minVector.x, maxVector.x) && IsInRange(target.y, minVector.y, maxVector.y);
-    }
-    private bool IsInRange(int x, int a, int b)
-    {
-        if (a == b)
-            return false;
-        if (a > b)
-        {
-            (b, a) = (a, b);
-        }
-        if (x < a || x > b)
-            return false;
-
-        return true;
-    }
-
-    /// <summary>
-    /// 检查并生成玩家周围的Chunk
-    /// </summary>
-    private void CheckAndGenerateSurroundChunks(Vector2Int centerChunkIndex)
-    {
-        // 生成以玩家为中心，指定半径内的所有Chunk
-        for (int y = -2 * preGenerateRadius; y <= 2 * preGenerateRadius; y++)
-        {
-            for (int x = -2 * preGenerateRadius; x <= 2 * preGenerateRadius; x++)
-            {
-                if (math.abs(x) + math.abs(y) <= 2 * preGenerateRadius)
-                {
-                    Vector2Int targetChunkIndex = centerChunkIndex + new Vector2Int(x, y);
-
-                    if (WithinLimits(targetChunkIndex, Bottomlefttotopright[0], Bottomlefttotopright[1]))
-                    {
-                        chunkManager.GenerateChunk(targetChunkIndex);
-                    }
-                    else continue;
-                }
-
-            }
-        }
+        noiseGenerator?.Dispose();
     }
 }

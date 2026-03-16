@@ -1,9 +1,8 @@
-using System.Collections;
-using System.Collections.Generic;
+using System;
 using Unity.Collections;
 using Unity.Jobs;
-using Unity.Mathematics;
 using UnityEngine;
+using Vector2 = UnityEngine.Vector2;
 
 public class NoiseGenerator
 {
@@ -14,6 +13,8 @@ public class NoiseGenerator
     private float lacunarity;
     private Vector2 offset;
     private Vector2Int chunkSize;
+
+    private NativeArray<Vector2> octaveOffsets;
     public NoiseGenerator(
         float noiseScale,
         int seed,
@@ -30,18 +31,15 @@ public class NoiseGenerator
         this.lacunarity = lacunarity;
         this.offset = offset;
         this.chunkSize = chunkSize;
+
+        GenerateOffset();
     }
 
-    /// <summary>
-    /// 并行生成噪声图
-    /// </summary>
-    public NativeArray<float> GenerateNoise(int startX, int startY)
+    private void GenerateOffset()
     {
-        var noiseArray = new NativeArray<float>(chunkSize.x * chunkSize.y, Allocator.TempJob);
-
         var prng = new System.Random(seed);
 
-        var octaveOffsets = new NativeArray<Vector2>(octaves, Allocator.TempJob);
+        octaveOffsets = new NativeArray<Vector2>(octaves, Allocator.Persistent);
 
         for (int i = 0; i < octaves; i++)
         {
@@ -50,6 +48,14 @@ public class NoiseGenerator
 
             octaveOffsets[i] = new Vector2(offsetX, offsetY);
         }
+    }
+
+    /// <summary>
+    /// 并行生成噪声图
+    /// </summary>
+    public NativeArray<float> GenerateNoise(int startX, int startY)
+    {
+        var noiseArray = new NativeArray<float>(chunkSize.x * chunkSize.y, Allocator.TempJob);
 
         var noiseJob = new NoiseCalculationJob
         {
@@ -68,8 +74,12 @@ public class NoiseGenerator
         var handle = noiseJob.Schedule(noiseArray.Length, 64);
         handle.Complete();
 
-        octaveOffsets.Dispose();
-
         return noiseArray;
+    }
+
+    public void Dispose()
+    {
+        if (octaveOffsets.IsCreated)
+            octaveOffsets.Dispose();
     }
 }
