@@ -1,8 +1,6 @@
 using System;
 using System.Collections.Generic;
-using Unity.Mathematics;
 using UnityEngine;
-using UnityEngine.SceneManagement;
 using UnityEngine.Tilemaps;
 
 [RequireComponent(typeof(Grid))]
@@ -33,7 +31,7 @@ public class DynamicTileMapGenerator : MonoBehaviour
 
 
     [Header("瓦片集和分类阈值（按高度降序）")]
-    public List<CustomTile> terrainTiles;
+    public List<TerrainTile> terrainTiles;
     public List<float> heightThresholds;
 
 

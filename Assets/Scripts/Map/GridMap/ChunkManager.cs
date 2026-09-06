@@ -1,11 +1,9 @@
-using UnityEngine;
-using System.Collections.Generic;
 using System;
-using JetBrains.Annotations;
-using Unity.Mathematics;
 using System.Linq;
+using System.Collections.Generic;
+using UnityEngine;
+using Unity.Mathematics;
 using UnityEngine.Tilemaps;
-using Unity.Collections;
 
 public class ChunkManager
 {
@@ -26,12 +24,11 @@ public class ChunkManager
         public int endY;
         public float lastAccessTime;
     }
-    // private readonly Dictionary<Vector2Int, TileType> baseTileDict = new();
     private TileType[,] baseTileMap;
     private Dictionary<Vector2Int, ChunkCacheData> chunkCacheDict = new();
     private readonly List<Vector2Int> chunksToUnload = new();
 
-    private Dictionary<Vector2Int, CustomTile>[] tileCaches =
+    private Dictionary<Vector2Int, TileBase>[] tileCaches =
     {
         new(),
         new(),
@@ -86,17 +83,6 @@ public class ChunkManager
         };
         return IsInRange(target.x, minVector.x, maxVector.x) && IsInRange(target.y, minVector.y, maxVector.y);
     }
-
-    // private bool IsInRange(int x, int a, int b)
-    // {
-    //     if (a == b)
-    //         return false;
-    //     if (a > b)
-    //     {
-    //        (a, b) = (b, a);
-    //     }
-    //     return x >= a && x <= b;
-    // }
 
     private int ToArrayX(int x)
     {

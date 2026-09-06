@@ -1,25 +1,23 @@
-using System.Collections;
 using System.Collections.Generic;
-using UnityEngine;
+using UnityEngine.Tilemaps;
 
 public class TerrainTileResolver
 {
-    private List<CustomTile> terrainTiles;
+    private List<TerrainTile> terrainTiles;
     private List<float> thresholds;
-    private readonly Dictionary<TileType, CustomTile> tileTypeToCustomTile = new();
+    private readonly Dictionary<TileType, Tile> tileTypeToTile = new();
 
     public TerrainTileResolver(
-        List<CustomTile> terrainTiles,
+        List<TerrainTile> terrainTiles,
         List<float> thresholds)
     {
             this.terrainTiles = terrainTiles;
         this.thresholds = thresholds;
 
-        // 瓦片类型到资源的映射
         if (terrainTiles != null)
             foreach (var tile in terrainTiles)
             {
-                tileTypeToCustomTile[tile.type] = tile;
+                tileTypeToTile[tile.type] = tile;
             }
     }
 
@@ -38,14 +36,14 @@ public class TerrainTileResolver
         return terrainTiles[^1].type;
     }
 
-    public CustomTile GetTileByType(TileType type)
+    public Tile GetTileByType(TileType type)
     {
-        tileTypeToCustomTile.TryGetValue(type, out var tile);
+        tileTypeToTile.TryGetValue(type, out var tile);
         return tile;
     }
 
-    public IReadOnlyDictionary<TileType, CustomTile> TileTypeToCustomTile
+    public IReadOnlyDictionary<TileType, Tile> TileTypeToTile
     {
-        get { return tileTypeToCustomTile; }
+        get { return tileTypeToTile; }
     }
 }

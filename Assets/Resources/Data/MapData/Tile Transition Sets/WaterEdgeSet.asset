@@ -1,0 +1,43 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a21d9b1a82b84a4f92ed8e42f130e35b, type: 3}
+  m_Name: WaterEdgeSet
+  m_EditorClassIdentifier: 
+  transitionSlots:
+  - sprite: {fileID: -1737887389, guid: 1d3948cbc5067414f9e138ecb1d5b3f8, type: 3}
+    colliderType: 1
+  - sprite: {fileID: -1708129509, guid: 1d3948cbc5067414f9e138ecb1d5b3f8, type: 3}
+    colliderType: 1
+  - sprite: {fileID: 1611289709, guid: 1d3948cbc5067414f9e138ecb1d5b3f8, type: 3}
+    colliderType: 1
+  - sprite: {fileID: 1250782749, guid: 1d3948cbc5067414f9e138ecb1d5b3f8, type: 3}
+    colliderType: 1
+  - sprite: {fileID: -699020853, guid: 1d3948cbc5067414f9e138ecb1d5b3f8, type: 3}
+    colliderType: 1
+  - sprite: {fileID: 27642009, guid: 1d3948cbc5067414f9e138ecb1d5b3f8, type: 3}
+    colliderType: 1
+  - sprite: {fileID: 396300176, guid: 1d3948cbc5067414f9e138ecb1d5b3f8, type: 3}
+    colliderType: 1
+  - sprite: {fileID: 1510889401, guid: 1d3948cbc5067414f9e138ecb1d5b3f8, type: 3}
+    colliderType: 1
+  - sprite: {fileID: -727203769, guid: 1d3948cbc5067414f9e138ecb1d5b3f8, type: 3}
+    colliderType: 1
+  - sprite: {fileID: -178000371, guid: 1d3948cbc5067414f9e138ecb1d5b3f8, type: 3}
+    colliderType: 1
+  - sprite: {fileID: 1409528363, guid: 1d3948cbc5067414f9e138ecb1d5b3f8, type: 3}
+    colliderType: 1
+  - sprite: {fileID: 1855048895, guid: 1d3948cbc5067414f9e138ecb1d5b3f8, type: 3}
+    colliderType: 1
+  - sprite: {fileID: -82036673, guid: 1d3948cbc5067414f9e138ecb1d5b3f8, type: 3}
+    colliderType: 1
+  - sprite: {fileID: 517209688, guid: 1d3948cbc5067414f9e138ecb1d5b3f8, type: 3}
+    colliderType: 1

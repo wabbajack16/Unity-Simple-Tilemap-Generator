@@ -1,0 +1,39 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a21d9b1a82b84a4f92ed8e42f130e35b, type: 3}
+  m_Name: SnowEdgeSet
+  m_EditorClassIdentifier: 
+  transitionSlots:
+  - sprite: {fileID: 835723065, guid: 1d3948cbc5067414f9e138ecb1d5b3f8, type: 3}
+    colliderType: 0
+  - sprite: {fileID: 2055372639, guid: 1d3948cbc5067414f9e138ecb1d5b3f8, type: 3}
+    colliderType: 0
+  - sprite: {fileID: -41572774, guid: 1d3948cbc5067414f9e138ecb1d5b3f8, type: 3}
+    colliderType: 0
+  - sprite: {fileID: -1598906621, guid: 1d3948cbc5067414f9e138ecb1d5b3f8, type: 3}
+    colliderType: 0
+  - sprite: {fileID: -264276024, guid: 1d3948cbc5067414f9e138ecb1d5b3f8, type: 3}
+    colliderType: 0
+  - sprite: {fileID: 1450791306, guid: 1d3948cbc5067414f9e138ecb1d5b3f8, type: 3}
+    colliderType: 0
+  - sprite: {fileID: 1484546923, guid: 1d3948cbc5067414f9e138ecb1d5b3f8, type: 3}
+    colliderType: 0
+  - sprite: {fileID: -322882964, guid: 1d3948cbc5067414f9e138ecb1d5b3f8, type: 3}
+    colliderType: 0
+  - sprite: {fileID: -1850598129, guid: 1d3948cbc5067414f9e138ecb1d5b3f8, type: 3}
+    colliderType: 0
+  - sprite: {fileID: 1260517869, guid: 1d3948cbc5067414f9e138ecb1d5b3f8, type: 3}
+    colliderType: 0
+  - sprite: {fileID: 412472845, guid: 1d3948cbc5067414f9e138ecb1d5b3f8, type: 3}
+    colliderType: 0
+  - sprite: {fileID: -989906157, guid: 1d3948cbc5067414f9e138ecb1d5b3f8, type: 3}
+    colliderType: 0

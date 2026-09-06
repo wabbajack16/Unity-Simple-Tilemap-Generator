@@ -1,5 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class CameraFollow : MonoBehaviour
@@ -11,14 +9,12 @@ public class CameraFollow : MonoBehaviour
     void Awake()
     {
         mainCamera = GetComponent<Camera>();
-
     }
 
     void Start()
     {
         mainCamera.allowMSAA = false;
         smoothSpeed = 1.5f;
-
     }
     void LateUpdate()
     {

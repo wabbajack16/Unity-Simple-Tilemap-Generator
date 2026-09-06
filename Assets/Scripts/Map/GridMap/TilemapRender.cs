@@ -45,7 +45,7 @@ public class TilemapRender
         transition.SetTiles(posV3, tiles);
     }
     public void ApplyTiles(
-        Dictionary<Vector2Int, CustomTile>[] caches)
+        Dictionary<Vector2Int, TileBase>[] caches)
     {
         SetGround(
             caches[0].Keys.ToArray(),

@@ -1,6 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
-using UnityEditor.SceneManagement;
 using UnityEngine;
 
 public class PlayerMovement : MonoBehaviour
@@ -14,7 +11,7 @@ public class PlayerMovement : MonoBehaviour
     void Awake()
     {
         if (rb == null)
-            if (!TryGetComponent<Rigidbody2D>(out rb))
+            if (!TryGetComponent(out rb))
             {
                 Debug.LogWarning("Rigidbody2D component not found on " + gameObject.name + ".");
                 rb = gameObject.AddComponent<Rigidbody2D>();
@@ -25,11 +22,9 @@ public class PlayerMovement : MonoBehaviour
         inputX = Input.GetAxisRaw("Horizontal");
         inputY = Input.GetAxisRaw("Vertical");
         inputDir = new Vector2(inputX, inputY).normalized;
-
     }
     void FixedUpdate()
     {
         rb.velocity = inputDir * speed;
     }
-
 }
