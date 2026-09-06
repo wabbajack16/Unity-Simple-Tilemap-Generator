@@ -8,19 +8,18 @@
 在 Unity 引擎中实现了一个简单的程序化生成的 2D 瓦片地图世界生成器，基于柏林噪声（Perlin noise），地形类型根据高度阈值划分，同时通过边界过渡规则，可自动在不同地形类型之间生成平滑的瓦片过渡效果，噪声生成逻辑借助 Unity 的 Job System（任务系统）和 Burst 编译器实现了并行化处理。
 
 ### 使用方法
-
-1. 基础地形瓦片
+#### 1. 基础地形瓦片
 
 基础地形资产位于 `Assets/Resources/Data/MapData/Base Tiles/`
 选中资产后，把 `Sprite` 换成自己的对应瓦片即可；需要碰撞的地形再调整 Collider Type。
 
-2. 过渡瓦片
+#### 2. 过渡瓦片
 
 过渡资产位于 `Assets/Resources/Data/MapData/Tile Transition Sets/`，
 把图集中对应方向的过渡 Sprite 拖进对应槽位即可。
 `要查看某条规则使用了哪个 Set，可打开 `Assets/Resources/Data/MapData/Boundary Rule/` 下的规则资产。
 
-3.配置新地形/过渡
+#### 3.配置新地形/过渡
 
 项目右键菜单提供了三个入口：
 
