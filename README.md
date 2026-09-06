@@ -36,5 +36,4 @@
 若新增一种从未定义过的地形，除美术资源外，还需要在 `TileType` 枚举中增加对应类型。
 
 ## 示例效果：
-<img src="Example/example.png" alt="地图生成效果" width="600" />
-<img src="Example/example2.png" alt="Chunk卸载效果" width="600" />
+<img src="Example/example.png" alt="地图生成效果" width="300" /> <img src="Example/example2.png" alt="Chunk卸载效果" width="300" />
